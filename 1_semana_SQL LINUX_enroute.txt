@@ -1,0 +1,125 @@
+Kamid Lozano Mena
+
+CLONAR REPOSITORIO DE GIT
+
+Mkdir git
+git init
+git clone itrepo@enroute.xyz:/workspace/irock
+Cd irock
+cd carpeta
+cat archivo.sql
+
+
+Acceso y desplegado de datos.
+
+1.- select ENAME, HIREDATE  from EMP;
+
+2.- select  HIREDATE,ENAME  from EMP;
+
+3.- select ENAME AS EMPLOYEE, HIREDATE, SAL from EMP WHERE SAL>2000.00  ;
+
+4.- select ENAME AS EMPLOYEE, HIREDATE, JOB, SAL from EMP WHERE JOB!= "CLERK" AND JOB!= "SALESMAN" ORDER BY ENAME ASC ;
+
+5.- select ENAME AS NAME, SAL AS SALARY   from EMP WHERE SAL<COMM ;
+
+6.- select * from EMP WHERE HIREDATE like "%1981%";
+
+7.- select * from EMP WHERE DEPTNO = 10 OR DEPTNO = 20;
+
+9.- select INVENTION, INVENTOR, YEAR from INVENTION WHERE INVENTOR like "%Edison%";
+
+10.- select * from NATION WHERE CAPITAL ="Wellington" OR CAPITAL="Georgetown" ;
+
+11.- select * from NATION WHERE  POPULATION>=230000 AND POPULATION<=820000 ORDER BY NATION ASC ;
+
+12.- select * from INVENTION WHERE YEAR<1800 or YEAR>1900 ORDER BY INVENTION ;
+
+
+CREACION Y MANTENIMIENTO A TABLAS Y VISTAS
+
+1.- create table EMPTEST select * from EMP;
+
+2.- ALTER TABLE EMPTEST ADD SEX VARCHAR(1);
+
+3.- ALTER TABLE EMPTEST MODIFY COLUMN SEX VARCHAR(10);
+
+4.- CREATE VIEW emp_no_money AS SELECT empno, ename, job, mgr, hiredate, deptno FROM EMP;
+
+5.- SELECT  table_schema, table_name, view_definition FROM   information_schema.views WHERE table_name = 'emp_no_money';
+
+6.- select ename,hiredate  from emp_no_money;
+
+7.- Error emp_no_money no cuenta con sal.
+
+8.- CREATE VIEW EMP_DEPNO_TEN  AS SELECT ENAME, DEPTNO, EMPNO FROM EMP WHERE DEPTNO="10";
+
+9.- select * from EMP_DEPNO_TEN;
+
+10.- drop view EMP_DEPNO_TEN;
+
+INSERT, UPDATE, DELETE Y UPDATE DE DATOS
+
+1.-INSERT INTO EMP (EMPNO, ENAME, JOB ,MGR, HIREDATE ,SAL ,COMM ,DEPTNO) VALUES (7940, 'KAMID', 'ANALYST',7785, "1981-08-23" ,  15000.00 , 0.00 , 10);
+
+2.-INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES ( 99, 'Educacion','Maui');
+
+3.-UPDATE EMP set SAL=SAL+1000 where EMPNO=7940;
+
+4.-DELETE FROM EMP WHERE EMPNO=7940;
+
+5.-CREATE VIEW EMP_DEPNO_TEN  AS SELECT ENAME, DEPTNO, EMPNO FROM EMP WHERE DEPTNO="10";
+
+6.-UPDATE EMP_DEPNO_TEN  set DEPTNO=20 where ENAME="KING";
+
+7.-Como la vista estaba con una condición de que solo se pueden observar los usuarios del departamento 10 el usuario King se quitó de la lista.
+
+
+Referencia a tipos de dato y funciones en consultas.
+
+1.- UPDATE INVENTION SET INVENTION = UPPER(INVENTION);
+
+2.- SELECT ENAME, TIMESTAMPDIFF(MONTH, HIREDATE, '2017-06-16') FROM EMP;
+
+3.- SELECT ENAME, SAL, DATE_FORMAT(HIREDATE, "%D of %M, %Y ") , COMM from EMP WHERE SAL+COMM>COMM*2 ;
+
+4.- SELECT LOWER(ENAME), ROUND(SAL/100)*100, COMM from EMP   ;
+
+5.-SELECT INVENTION, YEAR(CURDATE())-YEAR as 'YEAR DIFF' FROM INVENTION WHERE INVENTION = 'Coifon Gin';
+
+6.- SELECT CONCAT(UPPER(LEFT(INVENTOR, 8)), ' invented the ', INVENTION)  FROM INVENTION WHERE INVENTION LIKE '%machine%'
+
+7.- select * from EMP WHERE COMM is not NULL;
+
+8.-SELECT CONCAT(ENAME, ' gana', SAL, ' mensualmente pero quiere', SAL*3 ) from EMP; 
+
+
+Recupere renglones basándose en grupos.
+
+1.- SELECT MIN(YEAR), MAX(YEAR) FROM INVENTION limit 2;
+
+2.- select count(INVENTION) FROM INVENTION ;
+
+3.- select count(DISTINCT NATION_CODE) from INVENTION;
+
+4.- select NATION_CODE , count(INVENTOR) from INVENTION group by NATION_CODE;
+
+5.- select " NATION" , SUM(AREA) from NATION WHERE left(NATION, 1)= "A" or left(NATION, 1)= "B" or left(NATION, 1)="C" GROUP BY LEFT(NATION, 1) ;   
+
+JOIN DE MULTIPLES TABLAS
+
+1.-select ename, dname, loc from EMP E INNER JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE ename = "SMITH";
+
+2- select INVENTOR, NATION from INVENTION I INNER JOIN NATION N ON I. NATION_CODE = N.CODE WHERE INVENTOR LIKE 'B%';
+
+3.- select NATION, count(INVENTION) from INVENTION I INNER JOIN NATION N ON I. NATION_CODE = N.CODE GROUP BY NATION_CODE ;
+
+4.- select INVENTOR, INVENTION, YEAR from INVENTION WHERE YEAR="1879" or YEAR= "1880" ;
+
+5.- select NATION, AREA, NORTH,SOUTH ,EAST ,WEST  from NATION N INNER JOIN BORDER B ON N.CODE = B.NATION_CODE WHERE (NORTH= 'x'and SOUTH ='x'and EAST='x' )OR (NORTH= 'x'and SOUTH ='x'and WEST='x' )OR (WEST= 'x'and SOUTH ='x'and EAST='x' )OR (NORTH= 'x'and WEST ='x'and EAST='x' ) or (NORTH= 'x'and SOUTH ='x'and EAST='x'and WEST = 'x') ;
+
+6.-select NATION, POPULATION, AREA, NORTH,SOUTH ,EAST ,WEST  from NATION N INNER JOIN BORDER B ON N.CODE = B.NATION_CODE WHERE  AREA >377915 ;
+
+
+
+
+
