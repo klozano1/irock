@@ -1,0 +1,38 @@
+
+<html>
+  <head>
+
+        <script type="text/javascript">
+    function Sum()
+    {
+        // captura las entradas de los valores
+        var value1 = document.getElementById('value1').value;
+        var value2 = document.getElementById('value2').value;
+
+        // Add them together and display
+        var suma = parseFloat(value1) + parseFloat(value2);
+
+	if (isNaN(suma)=== true){
+
+	document.getElementById('suma1').value="Error";
+
+	}
+
+	if (isNaN(suma)=== false  ){
+
+	document.getElementById('suma1').value=suma;
+
+	}
+    }
+        </script>
+
+</head>
+<body>
+       <input  type="text"  id="value1" onchange="Sum();" />
+        <input  type="text" id="value2" onchange="Sum();" />      
+	&nbsp;
+        <output type="text" id="suma1" />
+
+</body>
+</html>
+

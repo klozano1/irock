@@ -1,0 +1,31 @@
+
+<html>
+  <head>
+
+        <script type="text/javascript">
+	var url = 'http://irock.enroute.xyz:4000/';
+	function load(url, callback) {
+  	var xhr = new XMLHttpRequest();
+
+ 	 xhr.onreadystatechange = function() {
+   	 if (xhr.readyState === 4) {
+     	 console.log(xhr.response); //Outputs a DOMString by default
+    }
+  }
+
+  xhr.open('GET', url, true);
+  xhr.send('');
+}
+        </script>
+
+</head>
+<body>
+
+ <form action=""  method ="post">Buscador: <input type="text" name="name"><br> <input type="submit" value="Submit"></form>
+ <output type="text" id="docs" />
+
+</body>
+</html>
+
+
+

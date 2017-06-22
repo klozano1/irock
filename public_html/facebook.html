@@ -1,0 +1,298 @@
+<html>
+  <head>
+
+<style type="text/css">
+	html{margin:0;}
+	body{margin:0;}
+         p {display:inline;float:left }
+        div{display:inline;}
+        form{display:inline;}
+
+	#searchAjax{
+	background-color:#7CE6E4; 
+	border-radius:30px;
+	width: 180px;
+	margin:-1;
+			}
+</style>
+
+<script>
+    function getInfo() {
+  var nameToSearch = document.getElementById('searchAjax').value;
+  var pName = {name: nameToSearch};
+  var xhttp = new XMLHttpRequest();
+  var url  = "http://irock.enroute.xyz:4000/search/";
+  deleteElementById('main-presentation');
+
+  xhttp.onreadystatechange = function () {
+    var infoArr;
+    if (this.readyState == 4 && this.status == 200) {
+      infoArr = JSON.parse(this.responseText);
+      processJSON(infoArr.response.docs);
+    }
+  }
+
+  xhttp.open("POST",url, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("name="+pName.name);
+}
+  function processJSON(arr) {
+    var out = "";
+    var placeHolder = document.getElementById("main-presentation");
+    var i;   
+	//alert(arr[0].nombre);
+    for (i = 0; i <10 ; i++) {
+      out ='<div>' +
+          '<p class="data-field">Nombre: ' +
+            arr[i].nombre  + 
+          '</p>' +
+	'<br>'+
+          '<p class="data-field">Cedula Profesional: ' +
+            arr[i].numCedula +
+          '</p>' + '<br>'+
+          '<p class="data-field">Titulo: ' +
+            arr[i].titulo +
+          '</p>' + '<br>'+
+        '</div>';
+      console.log(out);
+      var node = document.createElement('arcticle');
+      var eCreated = placeHolder.appendChild(node);
+      eCreated.setAttribute('id','person-' + arr[i].id);
+      eCreated.setAttribute('class','info-card');
+      eCreated.innerHTML = out;
+    }
+    
+  }
+
+function deleteElementById(idName) {
+  var elements = document.getElementById(idName);
+  while(elements.childNodes.length > 0) {
+    elements.removeChild(elements.childNodes[0]);
+  }
+}
+
+//Removes elements in new queries
+
+
+  </script>
+</head>
+<body>
+        <header style="background-color:#3b5998;margin:0; ">
+        <img src="home.png"style="padding-left:1em">     
+        <div style="color:white;padding-left:1em">Home</div>
+        <form action=""  method ="post"style="padding-left:3em"  >
+        <input id="searchAjax" type="text"  name="search" placeholder="Search Facebook..." onkeyup="getInfo()">
+	<img src="search.png"style="margin:-1">
+	<div style="color:white;padding-left:45em">Hello John Doe</div>
+	<img   src="profile-male.png" style="width:40px;height:40px;border-radius: 50%;">	
+	<img src="notifications.png" style="padding-left:2.5em" >
+	<p style="font-size:300%;padding-left:.5em">| </p>
+	<img src="settings.png" style="padding-left:.5em">
+        </form>
+        </header>
+
+  	<header style="background-color:#255,255,255;">
+        <img src="messenger.png"style="padding-left:1em">
+	<div style="color:gray;padding-left:1em">Messenger</div>
+        <img src="new.png"style="padding-left:5em">
+	<div style="color:#3b5998;padding-left:1em">News Feed</div>
+ 	<form action=""  method ="post"style="padding-left:7em;"  >
+        <input type="text"style="background-color:lightgray;width:300px;border-radius:25px"  name="what" placeholder="What are you up to...                              SEND">
+        <img src="camara.png"style="padding-left:8em">	
+        <img src="video.png"style="padding-left:1em">
+        <img src="gif.png"style="padding-left:1em">
+        <img src="paginas.png"style="padding-left:8em">
+	<div style="color:gray;padding-left:1em">My pages</div>
+        </header>
+
+       <table >
+        <tr>
+	<td style="background-color:lightgray;border-right-style:groove;width:300;float:left" >
+	<br>
+	<div style="color:gray;padding-left:5em">Upcoming Events</div><br><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<img src="http://www.emprendedoresnews.com/wp-content/uploads/2013/09/pablo_ruda.jpg"style="width:40px;height:40px;border-radius: 50%;;margin:-10 ">
+	<img src="https://assets.entrepreneur.com/content/16x9/822/20160908131033-negativa.jpeg"style="width:40px;height:40px;border-radius: 50%;margin:-10">
+	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_pvVHiRKNAxMXyJdZu7yQuLXCNUz_Gf7iGeLjcrkwMqqGL0Zh"style="width:40px;height:40px;border-radius: 50%;margin:-10">
+	<img src="http://tusimagenesde.com/wp-content/uploads/2014/09/imagenes-de-personas-2.jpg"style="width:40px;height:40px;border-radius:50%;margin:-10">
+	<br>
+	<font size="2" color="gray" style="padding-left:4.5em" >Create </font>
+ 	<p style="font-size:200%;padding-left:.5em;color:gray">|</p>
+	<font size="2" color="gray"style="padding-left:.5em"  >See all upcoming events</font>
+	<br>
+	<br>
+	<div style="color:gray;padding-left:5em">Birthday Today</div>
+	<br>
+	<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWCF6eIACrfzscOPsA9Th8ReGpVbfFfOArJWJY6fyVQdJyWVtaOA"style="width:40px;height:40px;border-radius: 50%;;margin:-10 ">
+	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIcCzhEnU7Cvum127Xbbpswn9zfCVw6wjBQhK303dP9aIad0qYIrEoWSoacQ"style="width:40px;height:40px;border-radius: 50%;;margin:-10 ">
+	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-J6L5WF0eAtsF34mPQytRnWXjRDLIxEGg-SmOVr89xkrhrgLwww"style="width:40px;height:40px;border-radius: 50%;;margin:-10 ">
+	<br>
+	<br>
+	<font size="2" color="gray" style="padding-left:5em" >See upcoming birthdays </font>
+        <br>
+        <br>
+	<div style="color:gray;padding-left:5em">Shortcuts</div>
+        <br>
+        <br>
+        <img src="http://wwwhere.io/img/thumbs/dribbble.jpg"style="width:20px;height:20px;padding-left:3em">
+	<font size="2" color="gray" style="padding-left:1.5em;" >Dribbble </font> 
+        <br>
+        <br>
+       <img src="http://www.roladesigns.com/images/social_media/behance.png"style="width:20px;height:20px;padding-left:3em">
+        <font size="2" color="gray" style="padding-left:1.5em;" >Behance </font>
+        <br>
+        <br>
+        <img src="https://pbs.twimg.com/profile_images/618568744860819456/kQV05k93.png"style="width:20px;height:20px;padding-left:3em">
+        <font size="2" color="gray" style="padding-left:1.5em;" >Fubiz </font>
+        <br>
+        <br>
+       <img src="https://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/052016/untitled-1_151.png?itok=5pgkMHV0"style="width:20px;height:20px;padding-left:3em">
+        <font size="2" color="gray" style="padding-left:1.5em;" >Instagram</font>
+        <br>
+        <br>        
+	<br>
+        <div style="color:gray;padding-left:5em">Explore</div>
+        <br>
+        <br>
+        <img src="http://netweaveonline.com/wp-content/uploads/2012/04/fb-event-icon.jpeg"style="width:20px;height:20px;padding-left:3em">
+        <font size="2" color="gray" style="padding-left:1.5em;" >Event </font>
+        <br>
+        <br>
+        <img src="https://www.asme.org/getmedia/c2c8ea5a-b690-4ba7-92bb-34bd1432862b/book_guide_hero_books.aspx"style="width:20px;height:20px;padding-left:3em">
+        <font size="2" color="gray" style="padding-left:1.5em;" >Pages </font>
+        <br>
+        <br>
+        <img src="https://lh3.googleusercontent.com/GWfQhWY8bFwJipJZW5zdZ3EPG7oOP88diyyDzYVDJGZde7EcKsF9LbVXETD0RZtusM9R=w300"style="width:20px;height:20px;padding-left:3em">
+        <font size="2" color="gray" style="padding-left:1.5em;" >Groups </font>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        </td>
+
+	<td style="width:250px;float:left ">
+		</td>
+
+        <td style="width:250px;float:left ">
+                <div style="color:black">
+                <section >
+                <article id="search-container">
+                </article>
+                </section>
+                <section id="main-presentation">
+                 </section>
+                </div>
+                </td>
+
+	        <td style="width:300px;float:left ">
+                </td>
+
+
+           
+
+        <td style="width:250px;;float:right;border-left-style:groove;background-color:lightgray ">
+	<br> &nbsp;&nbsp;&nbsp;&nbsp;
+	<img src="http://gananzia.com/wp-content/uploads/2015/11/Ion-Kortajarena-200x200.jpg"style="width:40px;height:40px;border-radius:50%;">
+	<font size="3" color="gray" style="padding-left:1.5em" >Julio Cesar Gzz </font>
+	 <img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:2.6em">
+	<br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTy6HcMzqHRd09NzDH0yBvSj3TqdTIVQRTjCFTWKJjmdtyr-oRR"style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Fernando Michel </font>
+         <img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:2.1em">
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="https://cde.peru.com/ima/0/1/3/6/4/1364293/924x530/facebook.jpg"style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Fernanda Trujillo </font>
+         <img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:2em">
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="http://www.eluniversalveracruz.com.mx/img/promos/salma_hayek_sexy_actrices_empire_500.jpg"style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Maria Lopez </font>
+         <img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:3.8em">
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="https://archive.is/b6xcW/68dd0ce6af14f0d00c1260899214b4d54103669e.jpg"style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Alejandro Lozano </font>
+         <img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:1.7em">
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="http://www.vanguardia.com/imgplanos/Noticia_600x400/foto_grandes_400x300_noticia/2011/02/13/14galerxxx002_smal_tp.jpg"style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Marco Hernandez </font>
+         <img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:1.7em">
+	<br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="http://www.eluniversal.com.co/sites/default/files/styles/940x640/public/201407/shak_2_0.jpg?itok=ydPalsMD" style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Carmen Mena </font>
+         <img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:3.1em">
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="http://www.vanguardia.com/sites/default/files/imagecache/Noticia_600x400/foto_grandes_400x300_noticia/2014/09/05/web_james_big_tp.jpg"style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Luis Medina </font>
+         <img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:3.7em">
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="http://i1.mendozapost.com/files/image/23/23079/553eb37889cbc_1420_!.jpg?s=8025b3f9ca4b66ccc8ff542df5e999e5&d=1431446556" style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Daniela Lozano </font>
+         <img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:2.5em">
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="https://www.euroresidentes.com/entretenimiento/ocio-y-tiempo-libre/wp-content/uploads/sites/22/2014/09/MATTBOMER.jpg"style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Daniel Elizondo </font>
+         <img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:2.3em">
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+        <img src="http://www.cabroworld.com/wp-content/uploads/2016/03/20-PERSONAS-QUE-CREYERON-SER-SEXYES-15-537x750.jpg"style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Andrea Triana </font>
+         <img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:2.9em">
+	<br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGunljDv2Qroar8irEmM57f2_MG8pMqatj4dCYXQboWW5dkpQh"style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Mario Montemayor</font>
+	<img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:.8em">
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+         <img src="http://www.corazonblanco.com/media/galeria/44/8/1/7/7/n_real_madrid_varios-9327718.jpeg"style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Zuelen Rovira</font>
+	<img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:2.9em">
+         <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;
+         <img src="https://s-media-cache-ak0.pinimg.com/736x/0b/b8/81/0bb881aa0639ffdd0c24754612888fdc.jpg"style="width:40px;height:40px;border-radius:50%;">
+        <font size="3" color="gray" style="padding-left:1.5em" >Victor Quiroga</font>
+	<img src="http://www.clker.com/cliparts/g/n/y/g/K/e/green-ball-md.png"style="width:10px;height:10px;padding-left:2.6em">
+
+
+
+
+
+
+
+
+
+        </td>
+	</table>
+        </td>
+
+        </tr>
+        </table>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

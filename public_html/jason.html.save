@@ -1,0 +1,37 @@
+ <html>
+  <head>
+
+        <script type="text/javascript">
+	var url = 'http://irock.enroute.xyz:4000/search';
+	function load(url, callback) {
+
+	var xhr = new XMLHttpRequest();	
+
+ 	xhr.onreadystatechange = function() {
+    	if (xhr.readyState === 4) {
+	callback(JSON.parse(xhr.response).response.docs[0])
+      
+   		 }
+	}
+
+		xhr.open('POST', url, true);
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  		xhr.send('name=Rodrigo');
+	}
+	load(url, function(load){
+	console.log('load');
+
+	});
+
+
+        </script>
+
+</head>
+<body>
+
+ 
+</body>
+</html>
+
+
+
