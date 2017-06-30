@@ -1,0 +1,90 @@
+<html>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3                                                                                        .3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww                                                                                        7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<title>Home</title>
+<body>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+        <div>
+        <div class="jumbotron vertical-center">
+  <div class="container">
+    <div class="row">
+                <div class="col-md-offset-4 col-md-2">
+                        <input type="text" id="name" />
+                        <input type="button" id="submit" value="Search" />
+                </div>
+        </div>
+        </div>
+  </div>
+                <div class="row">
+                  <div class="col-md-offset-4 col-md-3" id="data">
+
+                        </div>
+          </div>
+</div>
+        <script type="text/javascript">
+
+                var url = "http://irock.enroute.xyz:4000/search/";
+
+                function load() {
+                        var http = new XMLHttpRequest();
+                        http.open("POST", url, true);
+
+                        //Send the proper header information along with the requ                                                                                        est
+                        http.setRequestHeader("Content-type", "application/x-www                                                                                        -form-urlencoded");
+
+                        http.onreadystatechange = function() {//Call a function                                                                                         when the state changes.
+                                if(http.readyState == 4 && http.status == 200) {
+                                        doWork(http.responseText);
+                                }
+                        }
+                        var input_name = document.getElementById("name");
+                        http.send("name=" + input_name.value);
+                }
+
+                function load_tiny_faces() {
+                        var http = new XMLHttpRequest();
+                        http.open("GET", 'https://tinyfac.es/api/users', true);
+
+                        //Send the proper header information along with the requ                                                                                        est
+                        http.setRequestHeader("Content-type", "application/x-www                                                                                        -form-urlencoded");
+
+                        var response = "";
+
+                        http.onreadystatechange = function() {//Call a function                                                                                         when the state changes.
+                                if(http.readyState == 4 && http.status == 200) {
+                                        response = http.responseText;
+                                }
+                        }
+                        http.send();
+                        return response;
+                }
+
+                function doWork(data){
+
+                        var obj = JSON.parse(data);
+                        var div_data = document.getElementById("data");
+
+                        var faces = load_tiny_faces();
+
+                        div_data.innerHTML = "<ul>"
+
+                        obj.response.docs.forEach(function(element) {
+                                                        div_data.innerHTML = div                                                                                        _data.innerHTML +
+                                                                "<li>"+
+                                                                element.nombre +
+                                                                " " +
+                                                                element.paterno                                                                                         +
+                                                                " " +
+                                                                element.materno                                                                                         +
+                                                                "</li>";
+                                                });
+                        div_data.innerHTML = div_data.innerHTML + "</ul>"
+                }
+
+                var btn_search = document.getElementById("submit");
+                btn_search.addEventListener("click", load);
+
+        </script>
+</body>
+</html>
+

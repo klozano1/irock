@@ -1,0 +1,31 @@
+<html>
+<head>
+
+</head>
+<body>
+
+<script type"text/javascript">
+
+	function load(url,callback){
+	var palabra=document.getElementById("name").value;
+	var url = 'http://irock.enroute.xyz:4000/search/';
+  	var xhr = new XMLHttpRequest();
+  	xhr.onreadystatechange = function()
+    	{
+    		if (xhr.readyState === 4) {
+      			console.log(xhr.response); //Outputs a DOMString by default
+      			var objs = JSON.parse(xhr.response);
+    		}
+	}
+  	 xhr.open('POST', url, true);
+  	 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  	 xhr.send("name="+palabra);
+  	 document.getElementById("j").value=objs;
+	}
+</script>
+	<input name="name" id="name"/>
+	<input type="button" id="boton" value="da click" onclick="load();" />
+	<output name="x" value="..." id="j"> </output>
+</body>
+</html>
+

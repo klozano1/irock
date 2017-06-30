@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Facebook</title>
+
+</head>
+<style>
+
+    background-color:#3b5998;
+
+</style>
+<body>
+        <header> <img src="FullSizeRender.jpg"  style="width:40px;height:50px;border:1px; solid #3b5998;        ">  Kamid Marcell Lozano Mena <form action="/action_page.html">Buscador: <input type="text" name="busqueda"><br> <input type="submit" value="Submit"></form><a href="http://irock.enroute.xyz/kmarcell/public_html/">HOME</a>  <a href=""> MESSAGES</a> <a href="">EXIT</a> </header>
+
+<center> <div style="width:500px;height:100px;border:1px solid #000;">    Conversacion </div></center>
+
+ <form action="/action_page.html">Escribe el Mensaje <input type="text" name="mensaje"><br> <input type="submit" value="Submit"></form>
+
+
+
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+
+ <p>                              </p>
+</body>
+</html>
+
+
+
+
+
